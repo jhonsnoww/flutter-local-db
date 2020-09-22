@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localdb/message.dart';
 
+import 'custom_input.dart';
 import 'home.dart';
 
 void main() {
@@ -11,12 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Test Local DB',
+      title: 'Local DB',
       home: Scaffold(
           appBar: AppBar(
             title: Text('Local DB'),
           ),
-          body: Home()),
+          body: MessageWidget()),
     );
   }
 }

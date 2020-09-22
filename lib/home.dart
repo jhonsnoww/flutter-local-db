@@ -27,29 +27,57 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: Column(
         children: [
-          TextFormField(
-            controller: nameController,
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: TextFormField(
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  hintText: "Name",
+                  contentPadding: EdgeInsets.only(left: 20)),
+              controller: nameController,
+            ),
           ),
-          TextFormField(
-            controller: phoneController,
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: TextFormField(
+              keyboardType: TextInputType.phone,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  hintText: "Phone",
+                  contentPadding: EdgeInsets.only(left: 20)),
+              controller: phoneController,
+            ),
           ),
-          TextFormField(
-            controller: noController,
-          ),
-          TextFormField(
-            controller: searchController,
-            decoration: InputDecoration(
-              hintText: "Search",
-              contentPadding: EdgeInsets.only(left: 15),
-              suffixIcon: InkWell(
-                  child: Icon(Icons.search),
-                  onTap: () {
-                    search(searchController.text.toString());
-                  }),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.done,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  suffixIcon:
+                      IconButton(icon: Icon(Icons.scanner), onPressed: () {}),
+                  // suffix:
+                  //     IconButton(icon: Icon(Icons.scanner), onPressed: () {}),
+                  hintText: "Lot Number",
+                  contentPadding: EdgeInsets.only(left: 20)),
+              controller: noController,
             ),
           ),
           RaisedButton(
-              child: Text("Add"),
+              color: Colors.blue.shade500,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              child: Text(
+                "Add",
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: () async {
                 Note note = Note();
                 note.name = nameController.text.toString();
@@ -64,7 +92,12 @@ class _HomeState extends State<Home> {
                       children: notes
                           .map((e) => Card(
                                 child: ListTile(
-                                  title: Text(e.no.toString()),
+                                  title: Row(
+                                    children: [
+                                      Text(e.no.toString()),
+                                      Text(e.created_at.toString()),
+                                    ],
+                                  ),
                                   subtitle: Text(e.name),
                                   trailing: FlatButton.icon(
                                       label: Text(e.phone),
